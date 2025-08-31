@@ -59,5 +59,13 @@ function renderTask(data = stack) {
 
 		const todoCheckboxWrapper = document.createElement("div");
 		todoCheckboxWrapper.classList.add(...styling.todoCheckboxWrapper);
+
+		for (let i = 0; i <= 6; i++) {
+			const inputCheckboxWrapper = document.createElement("div");
+			inputCheckboxWrapper.classList.add(...styling.inputCheckboxWrapper);
+
+			const inputCheckbox = document.createElement("input");
+			inputCheckbox.type = "checkbox";
+		}
 	});
 }
