@@ -26,5 +26,38 @@ function renderTask(data = stack) {
 
 	data.forEach((todo, index) => {
 		const fragment = document.createDocumentFragment();
+
+		const todo = document.createElement("li");
+		todo.classList.add(...styling.todo);
+
+		const headTodo = document.createElement("div");
+		headTodo.classList.add(...styling.headTodo);
+
+		const timetodo = document.createElement("time");
+		timetodo.classList.add(...styling.timeTodo);
+
+		const deleteButton = document.createElement("span");
+		deleteButton.classList.add(...styling.deleteButton);
+
+		const iconButton = document.createElement("i");
+		iconButton.classList.add(...styling.iconDelete);
+
+		const bodyTodo = document.createElement("div");
+		bodyTodo.classList.add(...styling.bodyTodo);
+
+		const todoActivityWrapper = document.createElement("div");
+		todoActivityWrapper.classList.add(...styling.todoActivityWrapper);
+
+		const todoInput = document.createElement("textarea");
+		todoInput.classList.add(...styling.todoInput);
+
+		const editTodoButton = document.createElement("span");
+		editTodoButton.classList.add(...styling.editTodoButton);
+
+		const iconEditTodo = document.createElement("i")
+		iconEditTodo.classList.add(...styling.iconEditTodo);
+
+		const todoCheckboxWrapper = document.createElement("div");
+		todoCheckboxWrapper.classList.add(...styling.todoCheckboxWrapper);
 	});
 }
