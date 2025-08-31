@@ -1,1 +1,7 @@
 .size { font-size: 1.7rem; }
+.todo-input:hover + .edit-todo-button {
+	opacity: 1;
+}
+.edit-todo-button:hover {
+	opacity: 1;
+}
