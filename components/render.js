@@ -1,4 +1,4 @@
-let stack = [];
+let stack = ['1'];
 let undoStack = [];
 let redoStack = [];
 
@@ -9,7 +9,7 @@ const styling = {
 	deleteButton: ['delete-buton', 'w-[30px]', 'h-[30px]', 'lg:w-[40px]', 'lg:h-[40px]', 'flex', 'items-center', 'justify-center', 'hover:cursor-pointer', 'active:scale-[0.9]'],
 	iconDelete: ['material-symbols-outlined', 'size'],
 
-	bodyTodo: ['body-todo', 'py-1', 'flex', 'items-center', 'flex-col', 'lg:flex-row gap-1'],
+	bodyTodo: ['body-todo', 'py-1', 'flex', 'items-center', 'flex-col', 'lg:flex-row','gap-1'],
 	todoActivityWrapper: ['todo-input', 'resize-none', 'block', 'w-full', 'md:text-lg', 'lg:text-[1.5rem]', 'font-semibold'],
 	todoInput: ['todo-input', 'resize-none', 'block', 'w-full', 'md:text-lg', 'lg:text-[1.5rem]', 'font-semibold'],
 	editTodoButton: ['edit-todo-button', 'w-[30px]', 'h-[30px]', 'lg:w-[40px]', 'lg:h-[40px]', 'absolute', 'right-[10px]', 'top-[50%]', 'translate-y-[-50%]', 'flex', 'items-center', 'justify-center', 'opacity-0', 'hover:cursor-pointer', 'hover:scale-[1.1]'],
@@ -27,8 +27,8 @@ function renderTask(data = stack) {
 	data.forEach((todo, index) => {
 		const fragment = document.createDocumentFragment();
 
-		const todo = document.createElement("li");
-		todo.classList.add(...styling.todo);
+		const todoList = document.createElement("li");
+		todoList.classList.add(...styling.todo);
 
 		const headTodo = document.createElement("div");
 		headTodo.classList.add(...styling.headTodo);
@@ -60,12 +60,31 @@ function renderTask(data = stack) {
 		const todoCheckboxWrapper = document.createElement("div");
 		todoCheckboxWrapper.classList.add(...styling.todoCheckboxWrapper);
 
+		// combine
+		headTodo.appendChild(timetodo);
+		headTodo.appendChild(deleteButton);
+
+		todoActivityWrapper.appendChild(todoInput);
+		todoActivityWrapper.appendChild(editTodoButton);
+
 		for (let i = 0; i <= 6; i++) {
 			const inputCheckboxWrapper = document.createElement("div");
 			inputCheckboxWrapper.classList.add(...styling.inputCheckboxWrapper);
 
 			const inputCheckbox = document.createElement("input");
 			inputCheckbox.type = "checkbox";
+
+			inputCheckboxWrapper.appendChild(inputCheckbox);
+			todoCheckboxWrapper.appendChild(inputCheckboxWrapper)
 		}
+
+		bodyTodo.appendChild(todoActivityWrapper);
+		bodyTodo.appendChild(todoCheckboxWrapper);
+
+		todoList.appendChild(bodyTodo);
+		fragment.appendChild(todoList);
+
+		ul.appendChild(fragment);
 	});
 }
+renderTask();
