@@ -1,3 +1,5 @@
+import { todoInputName, idInput } from "./validation.js";
+
 let stack = ['1'];
 let undoStack = [];
 let redoStack = [];
@@ -92,3 +94,22 @@ function renderTask(data = stack) {
 	});
 }
 renderTask();
+
+class Data {
+	constructor(data, id, check) {
+		this.data = data;
+		this.id = id;
+		this.check = check;
+	}
+}
+
+// add input data
+const buttonConfirm = document.getElementById("button-confirm");
+buttonConfirm.addEventListener("click", function() {
+	let inputNameValue = todoInputName.value.trim();
+	let IdTodo = idInput === ""
+		? null
+		: idInput.value.trim();
+
+	if (inputNameValue !== "") {}
+});
