@@ -41,6 +41,7 @@ function renderTask(data = stack) {
 
 		const iconButton = document.createElement("i");
 		iconButton.classList.add(...styling.iconDelete);
+		iconButton.textContent = "delete";
 
 		const bodyTodo = document.createElement("div");
 		bodyTodo.classList.add(...styling.bodyTodo);
@@ -62,25 +63,28 @@ function renderTask(data = stack) {
 
 		// combine
 		headTodo.appendChild(timetodo);
+		deleteButton.appendChild(iconButton);
 		headTodo.appendChild(deleteButton);
-
+		
 		todoActivityWrapper.appendChild(todoInput);
 		todoActivityWrapper.appendChild(editTodoButton);
-
+		
 		for (let i = 0; i <= 6; i++) {
 			const inputCheckboxWrapper = document.createElement("div");
 			inputCheckboxWrapper.classList.add(...styling.inputCheckboxWrapper);
 
 			const inputCheckbox = document.createElement("input");
+			inputCheckbox.classList.add(...styling.inputCheckbox);
 			inputCheckbox.type = "checkbox";
-
+			
 			inputCheckboxWrapper.appendChild(inputCheckbox);
 			todoCheckboxWrapper.appendChild(inputCheckboxWrapper)
 		}
-
+		
 		bodyTodo.appendChild(todoActivityWrapper);
 		bodyTodo.appendChild(todoCheckboxWrapper);
-
+		
+		todoList.appendChild(headTodo)
 		todoList.appendChild(bodyTodo);
 		fragment.appendChild(todoList);
 
