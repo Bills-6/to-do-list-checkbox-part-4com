@@ -1,6 +1,6 @@
-import { todoInputName, idInput } from "./validation.js";
-
-let stack = ['1'];
+import { todoInputName, idInput} from "./validation.js";
+import { isHelper } from "./createdPanel.js"; 
+let stack = [];
 let undoStack = [];
 let redoStack = [];
 
@@ -93,16 +93,17 @@ function renderTask(data = stack) {
 		ul.appendChild(fragment);
 	});
 }
-renderTask();
 
+function saveStack() {
+	localStorage.setItem("stack", JSON.stringify(stack));
+}
 class Data {
-	constructor(data, id, check) {
+	constructor(data, id) {
 		this.data = data;
 		this.id = id;
-		this.check = check;
+		this.check = [false, false, false, false, false, false, false];
 	}
 }
-
 // add input data
 const buttonConfirm = document.getElementById("button-confirm");
 buttonConfirm.addEventListener("click", function() {
@@ -111,5 +112,10 @@ buttonConfirm.addEventListener("click", function() {
 		? null
 		: idInput.value.trim();
 
-	if (inputNameValue !== "") {}
+	if (inputNameValue !== "") {
+		stack.push(new Data(inputNameValue, IdTodo));
+		todoInputName.value = "";
+		isHelper("close");
+		renderTask();
+	}
 });

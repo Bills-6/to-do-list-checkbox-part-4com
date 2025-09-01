@@ -25,7 +25,7 @@ document.addEventListener("keydown", function(isKey) {
 	}
 });
 
-function isHelper(thisFor) {
+export function isHelper(thisFor) {
 	if (thisFor === "open") {
 		createdPanel.dataset.panelThere = "true";
 		createdPanel.classList.remove("hidden");
