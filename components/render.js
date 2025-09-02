@@ -12,7 +12,7 @@ const styling = {
 	iconDelete: ['material-symbols-outlined', 'size'],
 
 	bodyTodo: ['body-todo', 'py-1', 'flex', 'items-center', 'flex-col', 'lg:flex-row','gap-1'],
-	todoActivityWrapper: ['todo-input', 'resize-none', 'block', 'w-full', 'md:text-lg', 'lg:text-[1.5rem]', 'font-semibold'],
+	todoActivityWrapper: ['todo-activity-wrapper', 'py-1', 'w-full', 'lg:grow', 'relative'],
 	todoInput: ['todo-input', 'resize-none', 'block', 'w-full', 'md:text-lg', 'lg:text-[1.5rem]', 'font-semibold'],
 	editTodoButton: ['edit-todo-button', 'w-[30px]', 'h-[30px]', 'lg:w-[40px]', 'lg:h-[40px]', 'absolute', 'right-[10px]', 'top-[50%]', 'translate-y-[-50%]', 'flex', 'items-center', 'justify-center', 'opacity-0', 'hover:cursor-pointer', 'hover:scale-[1.1]'],
 	iconEditTodo: ['material-symbols-outlined', 'size', 'pointer-events-none'],
@@ -54,12 +54,14 @@ function renderTask(data = stack) {
 		const todoInput = document.createElement("textarea");
 		todoInput.classList.add(...styling.todoInput);
 		todoInput.value = todo.data;
+		todoInput.disabled = true;
 
 		const editTodoButton = document.createElement("span");
 		editTodoButton.classList.add(...styling.editTodoButton);
 
 		const iconEditTodo = document.createElement("i")
 		iconEditTodo.classList.add(...styling.iconEditTodo);
+		iconEditTodo.textContent = "edit";
 
 		const todoCheckboxWrapper = document.createElement("div");
 		todoCheckboxWrapper.classList.add(...styling.todoCheckboxWrapper);
@@ -70,6 +72,7 @@ function renderTask(data = stack) {
 		headTodo.appendChild(deleteButton);
 		
 		todoActivityWrapper.appendChild(todoInput);
+		editTodoButton.appendChild(iconEditTodo);
 		todoActivityWrapper.appendChild(editTodoButton);
 		
 		for (let i = 0; i <= 6; i++) {
