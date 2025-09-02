@@ -96,6 +96,7 @@ function renderTask(data = stack) {
 		fragment.appendChild(todoList);
 
 		ul.appendChild(fragment);
+		saveStack();
 
 		// [< edit button script >]
 		editTodoButton.addEventListener("click", function() {
@@ -111,7 +112,7 @@ function renderTask(data = stack) {
 
 				const newValueTodo = todoInput.value;
 				stack[index].data = newValueTodo;
-				console.log(stack)
+				saveStack();
 			}
 		});
 	});
@@ -141,5 +142,14 @@ buttonConfirm.addEventListener("click", function() {
 		isHelper("close");
 		renderTask();
 		console.log(stack);
+	}
+});
+
+window.addEventListener("DOMContentLoaded", function() {
+	if (this.localStorage.getItem("stack") !== null) {
+		const takeStack = this.localStorage.getItem("stack");
+		stack = [...JSON.parse(takeStack)];
+		renderTask();
+		saveStack();
 	}
 });
