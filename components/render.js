@@ -96,6 +96,24 @@ function renderTask(data = stack) {
 		fragment.appendChild(todoList);
 
 		ul.appendChild(fragment);
+
+		// [< edit button script >]
+		editTodoButton.addEventListener("click", function() {
+			if (todoInput.hasAttribute("disabled")) {
+				todoInput.disabled = false;
+				todoInput.focus();
+
+				this.style.opacity = "1";
+			} else {
+				todoInput.disabled = true;
+				todoInput.blur();
+				this.setAttribute("style", "");
+
+				const newValueTodo = todoInput.value;
+				stack[index].data = newValueTodo;
+				console.log(stack)
+			}
+		});
 	});
 }
 
