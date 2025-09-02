@@ -1,6 +1,6 @@
 import { todoInputName, idInput} from "./validation.js";
 import { isHelper } from "./createdPanel.js"; 
-let stack = [];
+export let stack = [];
 let undoStack = [];
 let redoStack = [];
 
@@ -23,7 +23,7 @@ const styling = {
 }
 
 const ul = document.getElementById("list-wrapper");
-function renderTask(data = stack) {
+export function renderTask(data = stack) {
 	ul.innerHTML = null;
 
 	data.forEach((todo, index) => {
@@ -84,6 +84,11 @@ function renderTask(data = stack) {
 			inputCheckbox.type = "checkbox";
 			inputCheckbox.checked = todo.check[i];
 			
+			inputCheckbox.addEventListener("change", 
+				function() {
+					stack[index].check[i] = this.checked;
+					saveStack();
+				});
 			inputCheckboxWrapper.appendChild(inputCheckbox);
 			todoCheckboxWrapper.appendChild(inputCheckboxWrapper)
 		}
@@ -96,7 +101,7 @@ function renderTask(data = stack) {
 		fragment.appendChild(todoList);
 
 		ul.appendChild(fragment);
-		saveStack();
+		if (data === stack) saveStack();
 
 		// [< edit button script >]
 		editTodoButton.addEventListener("click", function() {
