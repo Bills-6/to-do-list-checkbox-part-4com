@@ -41,3 +41,14 @@ finishedFilter.addEventListener("change", function() {
 		renderTask(finishTodos);
 	} else renderTask();
 });
+
+// [< filter todo unfinish >]
+const unFinishFilter = document.getElementById("unfinish-filter");
+unFinishFilter.addEventListener("change", function() {
+	if (this.checked) {
+		const unFinishTodos = stack.filter((todos) => {
+			return todos.check.some(value => value === false);
+		});
+		renderTask(unFinishTodos);
+	} else renderTask();
+});
