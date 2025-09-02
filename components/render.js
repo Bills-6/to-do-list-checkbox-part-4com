@@ -145,6 +145,14 @@ buttonConfirm.addEventListener("click", function() {
 	}
 });
 
+// [< fitur remove stack forever >]
+const deleteForeverButton = document.getElementById("trash-button");
+deleteForeverButton.addEventListener("click", function() {
+	stack = [];
+	saveStack();
+	renderTask();
+});
+
 window.addEventListener("DOMContentLoaded", function() {
 	if (this.localStorage.getItem("stack") !== null) {
 		const takeStack = this.localStorage.getItem("stack");
