@@ -1,0 +1,1 @@
+const filterButton = document.getElementById("filter-button");
