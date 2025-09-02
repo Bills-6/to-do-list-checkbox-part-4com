@@ -53,6 +53,7 @@ function renderTask(data = stack) {
 
 		const todoInput = document.createElement("textarea");
 		todoInput.classList.add(...styling.todoInput);
+		todoInput.value = todo.data;
 
 		const editTodoButton = document.createElement("span");
 		editTodoButton.classList.add(...styling.editTodoButton);
@@ -78,6 +79,7 @@ function renderTask(data = stack) {
 			const inputCheckbox = document.createElement("input");
 			inputCheckbox.classList.add(...styling.inputCheckbox);
 			inputCheckbox.type = "checkbox";
+			inputCheckbox.checked = todo.check[i];
 			
 			inputCheckboxWrapper.appendChild(inputCheckbox);
 			todoCheckboxWrapper.appendChild(inputCheckboxWrapper)
@@ -117,5 +119,6 @@ buttonConfirm.addEventListener("click", function() {
 		todoInputName.value = "";
 		isHelper("close");
 		renderTask();
+		console.log(stack);
 	}
 });
