@@ -1,3 +1,5 @@
+import { styling } from "./render.js";
+
 const modeButton = document.getElementById("mode-button"),
 	iconMode = document.getElementById("mode-icon");
 const body = document.body;
@@ -33,7 +35,6 @@ function styleMode(isMode) {
 		localStorage.setItem("mode", "light");
 	}
 }
-
 const icondark = document.getElementById("dark-icon"),
 	iconLight = document.getElementById("light-icon");
 // move icon

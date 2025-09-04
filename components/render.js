@@ -4,7 +4,7 @@ export let stack = [];
 let undoStack = [];
 let redoStack = [];
 
-const styling = {
+export const styling = {
 	todo: ['todo', 'p-2', 'md:p-4', 'lg:p-6', 'pt-2', 'lg:pt-2', 'bg-gray-300', 'rounded-sm', 'shadow-md', 'shadow-bg-gray-300'],
 	headTodo: ['head-todo', 'flex', 'items-center', 'justify-between', 'mb-2'],
 	timeTodo: ['text-md', 'lg:text-lg'],
@@ -119,6 +119,18 @@ export function renderTask(data = stack) {
 				stack[index].data = newValueTodo;
 				saveStack();
 			}
+		});
+
+		// [< remove this item script >]
+		deleteButton.addEventListener("click", function() {
+			redoStack = [];
+
+			const isItemRemoved = stack.splice(index, 1)[0];
+			renderTask();
+			saveStack();
+
+			undoStack.push({ item: isItemRemoved, index });
+			console.log(undoStack);
 		});
 	});
 }
