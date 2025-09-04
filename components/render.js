@@ -138,6 +138,9 @@ export function renderTask(data = stack) {
 function saveStack() {
 	localStorage.setItem("stack", JSON.stringify(stack));
 }
+function saveItemRemoved() {
+	sessionStorage.setItem("itemRemoved", JSON.stringify(undoStack));
+}
 class Data {
 	constructor(data, id) {
 		this.data = data;
@@ -178,3 +181,21 @@ window.addEventListener("DOMContentLoaded", function() {
 		saveStack();
 	}
 });
+
+// [< icon undo redo color >]
+const iconUndo = document.getElementById("undo-icon"),
+	iconRedo = document.getElementById("redo-icon");
+function updateColorRedoUndo() {
+	if (undoStack.length > 0) {
+		iconUndo.classList.replace("text-gray-600", "text-gray-900");
+	} else {
+		iconUndo.classList.replace("text-gray-900", "text-gray-600");
+	}
+
+	if (redoStack.length > 0) {
+		iconRedo.classList.replace("text-gray-600", "text-gray-900");
+	} else {
+		iconRedo.classList.replace("text-gray-900", "text-gray-600");
+	}
+}
+
