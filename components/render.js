@@ -130,7 +130,8 @@ export function renderTask(data = stack) {
 			saveStack();
 
 			undoStack.push({ item: isItemRemoved, index });
-			console.log(undoStack);
+			saveItemRemoved();
+			updateColorRedoUndo();
 		});
 	});
 }
@@ -180,6 +181,11 @@ window.addEventListener("DOMContentLoaded", function() {
 		renderTask();
 		saveStack();
 	}
+	if (this.sessionStorage.getItem("itemRemoved") !== null){
+		const takeItem = this.sessionStorage.getItem("itemRemoved");
+		undoStack.push(JSON.parse(takeItem));
+		updateColorRedoUndo();
+	}
 });
 
 // [< icon undo redo color >]
@@ -199,3 +205,37 @@ function updateColorRedoUndo() {
 	}
 }
 
+// [< undo button script >]
+const undoButton = document.getElementById("undo-button");
+undoButton.addEventListener("click", function() {
+	if (undoStack.length > 0) {
+		const {item, index} = undoStack.pop();
+
+		redoStack.push({index,item});
+		stack.splice(index, 0, item);
+		renderTask();
+		saveStack();
+		updateColorRedoUndo();
+	}
+});
+
+// [< redo button script >]
+const redoButton = document.getElementById("redo-button");
+redoButton.addEventListener("click", function() {
+	const { item, index } = redoStack.pop();
+
+	if (stack[index] && stack[index].data === item.data) {
+		stack.splice(index, 1);
+	} else {
+		const fallbackIndex = stack.findIndex((i) => i === index);
+		if (fallbackIndex !== -1) {
+			stack.splice(fallbackIndex, 1);
+		}
+	}
+
+	undoStack.push({ item, index });
+	renderTask();
+	saveStack();
+	updateColorRedoUndo();
+});
+console.log(undoStack);
